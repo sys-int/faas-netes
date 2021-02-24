@@ -1,60 +1,19 @@
 functionNamespace: openfaas-fn  # Default namespace for functions
 openfaasPRO: false
-exposeServices: true
+exposeServices: false
 async: true
 serviceType: NodePort
-httpProbe: true
+httpProbe: false
 rbac: true
 clusterRole: true            # Set to true to have OpenFaaS administrate multiple namespaces
 createCRDs: true
 # create pod security policies for OpenFaaS control plane
 # https://kubernetes.io/docs/concepts/policy/pod-security-policy/
 psp: false
-securityContext: true
+securityContext: true // MAY BE OFF
 basic_auth: true
 generateBasicAuth: false
-
-# image pull policy for openfaas components, can change to `IfNotPresent` in offline env
 openfaasImagePullPolicy: "Always"
-
-# openfaasPRO components, which require openfaasPRO=true
-oidcAuthPlugin:
-  enabled: false
-  provider: "" # Leave blank, or put "azure"
-  license: "example"
-  insecureTLS: false
-  scopes: "openid profile email"
-  jwksURL: https://example.eu.auth0.com/.well-known/jwks.json
-  tokenURL: https://example.eu.auth0.com/oauth/token
-  audience: https://example.eu.auth0.com/api/v2/
-  authorizeURL: https://example.eu.auth0.com/authorize
-  welcomePageURL: https://gw.oauth.example.com
-  cookieDomain: ".oauth.example.com"
-  baseHost: "http://auth.oauth.example.com"
-  clientSecret: SECRET
-  clientID: ID
-  resources:
-    requests:
-      memory: "120Mi"
-      cpu: "50m"
-  replicas: 1
-  image: openfaas/openfaas-oidc-plugin:0.3.7
-  securityContext: true
-
-# Requires openfaasPRO=true
-# scale-to-zero feature
-faasIdler:
-  image: ghcr.io/openfaas/faas-idler-pro:0.4.2
-  replicas: 1
-  create: true
-  inactivityDuration: 30m               # If a function is inactive for 15 minutes, it may be scaled to zero
-  reconcileInterval: 2m                 # The interval between each attempt to scale functions to zero
-  readOnly: true                        # When set to true, no functions are scaled to zero
-  resources:
-    requests:
-      memory: "64Mi"
-
-## OSS components
 
 gateway:
   image: ghcr.io/openfaas/gateway:0.20.8
@@ -67,7 +26,7 @@ gateway:
   nodePort: 31112
   maxIdleConns: 1024
   maxIdleConnsPerHost: 1024
-  directFunctions: false
+  directFunctions: true
   # Custom logs provider url. For example openfaas-loki would be
   # "http://ofloki-openfaas-loki.openfaas:9191/"
   logsProviderURL: ""
@@ -90,7 +49,7 @@ faasnetes:
   readTimeout : "60s"
   writeTimeout : "60s"
   imagePullPolicy : "Always"    # Image pull policy for deployed functions
-  httpProbe: true               # Setting to true will use HTTP for readiness and liveness probe on Pods (incompatible with Istio < 1.1.5)
+  httpProbe: false               # Setting to true will use HTTP for readiness and liveness probe on Pods (incompatible with Istio < 1.1.5)
   setNonRootUser: false
   readinessProbe:
     initialDelaySeconds: 2
@@ -201,7 +160,7 @@ affinity: {}
 kubernetesDNSDomain: cluster.local
 
 istio:
-  mtls: false
+  mtls: true
 
 gatewayExternal:
   annotations: {}
