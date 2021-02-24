@@ -61,14 +61,14 @@ spec:
             mode: ISTIO_MUTUAL
 ---
 # disable mTLS to nats, the nats protocol is not supported by Istio
-apiVersion: networking.istio.io/v1alpha3
-kind: DestinationRule
-metadata:
-    name: "nats-no-mtls"
-    namespace: {{ .Release.Namespace }}
-spec:
-    host: "nats.{{ .Release.Namespace }}.svc.cluster.local"
-    trafficPolicy:
-        tls:
-            mode: DISABLE
+# apiVersion: networking.istio.io/v1alpha3
+# kind: DestinationRule
+# metadata:
+#     name: "nats-no-mtls"
+#     namespace: {{ .Release.Namespace }}
+# spec:
+#     host: "nats.{{ .Release.Namespace }}.svc.cluster.local"
+#     trafficPolicy:
+#         tls:
+#             mode: DISABLE
 {{- end -}}

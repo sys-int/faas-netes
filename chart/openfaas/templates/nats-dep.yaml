@@ -35,9 +35,11 @@ spec:
         ports:
         - containerPort: 4222
           protocol: TCP
+          name: tcp-clients
         {{- if .Values.nats.enableMonitoring }}
         - containerPort: 8222
           protocol: TCP
+          name: tcp-monitoring
         {{- end }}
         command: ["/nats-streaming-server"]
         args:

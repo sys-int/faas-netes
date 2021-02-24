@@ -16,16 +16,16 @@ spec:
   ports:
     - port: 4222
       protocol: TCP
-      name: clients
+      name: tcp-clients
     {{- if .Values.nats.enableMonitoring }}
     - port: 8222
       protocol: TCP
-      name: monitoring
+      name: tcp-monitoring
     {{- end }}
     {{- if .Values.nats.metrics.enabled }}
     - port: 7777
       protocol: TCP
-      name: metrics
+      name: tcp-metrics
     {{- end }}
   selector:
     app: nats
