@@ -10,7 +10,7 @@ createCRDs: true
 # create pod security policies for OpenFaaS control plane
 # https://kubernetes.io/docs/concepts/policy/pod-security-policy/
 psp: false
-securityContext: true // MAY BE OFF
+securityContext: true
 basic_auth: true
 generateBasicAuth: false
 openfaasImagePullPolicy: "Always"
