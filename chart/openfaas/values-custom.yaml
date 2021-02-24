@@ -162,7 +162,7 @@ affinity: {}
 kubernetesDNSDomain: cluster.local
 
 istio:
-  mtls: true
+  mtls: false
 
 gatewayExternal:
   annotations: {}
