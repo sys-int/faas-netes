@@ -95,7 +95,7 @@ queueWorker:
 # monitoring and auto-scaling components
 # both components
 prometheus:
-  create: false
+  create: true
   image: prom/prometheus:v2.11.0
   resources:
     requests:
@@ -103,7 +103,7 @@ prometheus:
   annotations: {}
 
 alertmanager:
-  create: false
+  create: true
   image: prom/alertmanager:v0.18.0
   resources:
     requests:
