@@ -12,11 +12,11 @@
 apiVersion: "security.istio.io/v1beta1"
 kind: "PeerAuthentication"
 metadata:
-  name: "default"
+  name: default
   namespace: {{ .Release.Namespace }}
 spec:
   mtls:
-    mode: ISTIO_MUTUAL
+    mode: STRICT
 ---
 # enforce mTLS to openfaas control plane
 apiVersion: networking.istio.io/v1alpha3
@@ -42,11 +42,11 @@ spec:
 apiVersion: "security.istio.io/v1beta1"
 kind: "PeerAuthentication"
 metadata:
-  name: "default"
+  name: default
   namespace: {{ $functionNs }}
 spec:
   mtls:
-    mode: ISTIO_MUTUAL
+    mode: STRICT
 ---
 # enforce mTLS to functions
 apiVersion: networking.istio.io/v1alpha3
