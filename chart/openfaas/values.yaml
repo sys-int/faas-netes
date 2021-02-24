@@ -22,6 +22,7 @@ createCRDs: true
 psp: false
 securityContext: true
 basic_auth: true
+basic_auth_pass: asdf1234
 generateBasicAuth: false
 
 # image pull policy for openfaas components, can change to `IfNotPresent` in offline env
